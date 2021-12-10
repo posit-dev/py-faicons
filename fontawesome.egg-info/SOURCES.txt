@@ -1,0 +1,15 @@
+AUTHORS.rst
+CONTRIBUTING.rst
+LICENSE
+MANIFEST.in
+README.md
+setup.cfg
+setup.py
+fontawesome/icons.json
+fontawesome.egg-info/PKG-INFO
+fontawesome.egg-info/SOURCES.txt
+fontawesome.egg-info/dependency_links.txt
+fontawesome.egg-info/not-zip-safe
+fontawesome.egg-info/top_level.txt
+tests/__init__.py
+tests/test_fontawesome.py
