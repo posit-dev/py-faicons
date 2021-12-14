@@ -1,1 +1,1 @@
-from .fontawesome import fa
+from .fontawesome import *

@@ -1,24 +1,39 @@
-========================
-Font Awesome for PyShiny
-========================
 
+# Font Awesome for PyShiny
 
 An interface to Font Awesome for use in PyShiny
 
+## Usage
 
-* Free software: MIT license
-* Documentation: https://fontawesome.readthedocs.io.
+Use `icon_svg()` to get an `<svg>` representation of any Font Awesome 5 icon.
+
+```python
+from fontawesome import icon_svg
+icon_svg("play")
+```
+
+And use it with PyShiny 
+
+```python
+from shiny import *
+input_button("btn", "Press me", icon_svg("play")).show()
+```
 
 
-Features
---------
 
-* TODO
+First clone the [py-htmltools](https://github.com/rstudio/py-htmltools) repository and install the package:
 
-Credits
--------
+```sh
+git clone https://github.com/rstudio/py-htmltools.git
+cd py-htmltools
+pip install -r requirements.txt
+make install
+```
 
-This package was created with Cookiecutter_ and the `audreyr/cookiecutter-pypackage`_ project template.
+Then do the same for [py-fontawesome]
 
-.. _Cookiecutter: https://github.com/audreyr/cookiecutter
-.. _`audreyr/cookiecutter-pypackage`: https://github.com/audreyr/cookiecutter-pypackage
+```sh
+git clone https://github.com/rstudio/py-fontawesome.git
+cd py-fontawesome
+make install
+```
