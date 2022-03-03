@@ -1,11 +1,13 @@
+from os.path import join, dirname
 import json
 import re
-from os.path import join, dirname
+from typing import Literal, Optional, TypedDict
+
 from htmltools import tags, Tag, css
 
 # TODO: make _html_escape public?
 from htmltools._util import _html_escape
-from typing import Dict, Literal, Optional, Union
+
 
 __all__ = ("icon_svg", "metadata")
 
@@ -92,20 +94,21 @@ def icon_svg(
     style = styles[0] if style is None else style
     if style not in styles:
         raise ValueError(
-            f"Style {style} not found for {name} icon. Posible styles are: {styles}"
+            f"Style {style} not found for {name} icon. Possible styles are: {styles}"
         )
 
     svg = icon["svg"][style]
+    svg_width = float(svg["width"])
 
     h = _parse_length_unit(height)
     w = _parse_length_unit(width)
-    if height is None and width is None:
+    if h is None and w is None:
         height = "1em"
-        width = str(round(svg["width"] / 512, 2)) + "em"
-    elif width is None:
-        width = str(round((svg["width"] / 512) * h.value, 2)) + h.unit
-    elif height is None:
-        height = str(round(w.value / (svg["width"] / 512), 2)) + w.unit
+        width = str(round(svg_width / 512, 2)) + "em"
+    elif h is not None and w is None:
+        width = str(round(svg_width / 512 * h["value"], 2)) + h["unit"]
+    elif h is None and w is not None:
+        height = str(round(w["value"] / (svg_width / 512), 2)) + w["unit"]
 
     svg_attrs = dict(viewBox=f"0 0 {svg['width']} 512")
 
@@ -120,10 +123,10 @@ def icon_svg(
         svg_attrs["aria-label"] = _html_escape(title, attr=True)
         svg_attrs["role"] = "img"
 
-    # N.B. this returns a tag object, not a string, because I don't think it's
-    # possible for jsxTag() to handle HTML() attributes, which means nav() can't
-    # support it out-of-the-box (if we really need this to be a string, we can
-    # probably make nav()'s JSX component smarter)
+    # N.B. this returns a tag object, not a string, because I don't think it's possible
+    # for jsxTag() to handle HTML() attributes, which means nav() can't support it
+    # out-of-the-box (if we really need this to be a string, we can probably make
+    # nav()'s JSX component smarter)
     return tags.svg(
         None if title is None else tags.title(_html_escape(title)),
         Tag("path", d=svg["path"]),
@@ -146,7 +149,12 @@ def icon_svg(
     )
 
 
-def _parse_length_unit(x: str) -> Dict[str, Union[str, float]]:
+class ParsedUnit(TypedDict):
+    value: float
+    unit: str
+
+
+def _parse_length_unit(x: Optional[str]) -> Optional[ParsedUnit]:
     if x is None:
         return None
 
@@ -162,7 +170,7 @@ def _parse_length_unit(x: str) -> Dict[str, Union[str, float]]:
 
     value = float(re.sub("[a-z]+$", "", x))
 
-    return dict(value=value, unit=unit)
+    return ParsedUnit(value=value, unit=unit)
 
 
 _css_length_units = [
