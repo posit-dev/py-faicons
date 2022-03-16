@@ -85,5 +85,5 @@ dist: clean ## builds source and wheel package
 	python setup.py bdist_wheel
 	ls -l dist
 
-install: clean ## install the package to the active Python's site-packages
-	python setup.py install
+install: dist ## install the package to the active Python's site-packages
+	python -m pip install --force-reinstall dist/fontawesome*.whl --find-links ../py-htmltools/dist/
