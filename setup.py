@@ -33,6 +33,9 @@ setup(
     keywords='fontawesome',
     name='fontawesome',
     packages=find_packages(include=['fontawesome', 'fontawesome.*']),
+    package_data={
+        "shiny": ["py.typed"],
+    },
     test_suite='tests',
     tests_require=test_requirements,
     url='https://github.com/cpsievert/fontawesome',
