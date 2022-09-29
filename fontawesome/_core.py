@@ -12,7 +12,7 @@ from htmltools._util import _html_escape
 __all__ = ("icon_svg", "metadata")
 
 
-class IconSvg(TypedDict):
+class IconDataSvg(TypedDict):
     last_modified: float
     raw: str
     viewBox: List[str]
@@ -32,7 +32,7 @@ class IconData(TypedDict):
     # It looks like in practice, the only keys for `svg` are "solid" and "brands", and
     # it must contain exactly one of them, but it's not clear to me how to declare that
     # type, so we'll just use a Dict.
-    svg: Dict[str, IconSvg]
+    svg: Dict[str, IconDataSvg]
     free: List[str]
 
 
