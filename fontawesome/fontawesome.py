@@ -1,7 +1,7 @@
 from os.path import join, dirname
 import json
 import re
-from typing import Literal, Optional, TypedDict
+from typing import Literal, Optional, TypedDict, List, Dict, cast
 
 from htmltools import tags, Tag, css
 
@@ -11,8 +11,33 @@ from htmltools._util import _html_escape
 
 __all__ = ("icon_svg", "metadata")
 
+
+class IconSvg(TypedDict):
+    last_modified: float
+    raw: str
+    viewBox: List[str]
+    width: int
+    height: int
+    path: str
+
+
+class IconData(TypedDict):
+    changes: List[str]
+    ligatures: List[str]
+    search: Dict[str, List[str]]
+    styles: List[str]
+    unicode: str
+    label: str
+    voted: bool
+    # It looks like in practice, the only keys for `svg` are "solid" and "brands", and
+    # it must contain exactly one of them, but it's not clear to me how to declare that
+    # type, so we'll just use a Dict.
+    svg: Dict[str, IconSvg]
+    free: List[str]
+
+
 with open(join(dirname(__file__), "icons.json")) as f:
-    _ICONS = json.load(f)
+    _ICONS = cast(Dict[str, IconData], json.load(f))
 
 
 def metadata():
