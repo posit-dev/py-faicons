@@ -5,7 +5,7 @@
 import pytest
 
 
-from fontawesome import fontawesome
+import fontawesome
 
 
 @pytest.fixture
