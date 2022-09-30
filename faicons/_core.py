@@ -1,7 +1,7 @@
 from os.path import join, dirname
 import json
 import re
-from typing import Literal, Optional, TypedDict, List, Dict, cast
+from typing import Literal, Optional, TypedDict, List, Dict, cast, Any
 
 from htmltools import tags, Tag, css
 
@@ -22,6 +22,9 @@ class IconDataSvg(TypedDict):
 
 
 class IconData(TypedDict):
+    # In practice, the keys appear to be "names" and "unicodes" but "names" is not
+    # always present. For now, we'll just leave this as Dict[str, Any].
+    aliases: Dict[str, Any]
     changes: List[str]
     ligatures: List[str]
     search: Dict[str, List[str]]

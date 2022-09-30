@@ -1,7 +1,9 @@
 
 # Font Awesome for Shiny
 
-An interface to Font Awesome for use in Shiny for Python.
+An interface to Font-Awesome for use in Shiny for Python.
+
+This package currently uses Font-Awesome 6.2.0.
 
 ## Installation
 
@@ -18,9 +20,9 @@ from faicons import icon_svg
 icon_svg("play")
 ```
 
-And use it with PyShiny
+Example usage in Shiny:
 
 ```python
-from shiny import *
-input_button("btn", "Press me", icon_svg("play")).show()
+from shiny import ui
+ui.input_action_button("btn", "Press me", icon=icon_svg("play")).show()
 ```
