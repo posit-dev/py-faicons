@@ -1,1 +1,1 @@
-"""Unit test package for fontawesome."""
+"""Unit test package for faicons."""

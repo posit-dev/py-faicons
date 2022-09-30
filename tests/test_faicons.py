@@ -1,11 +1,11 @@
 #!/usr/bin/env python
 
-"""Tests for `fontawesome` package."""
+"""Tests for `faicons` package."""
 
 import pytest
 
 
-import fontawesome
+import faicons
 
 
 @pytest.fixture
