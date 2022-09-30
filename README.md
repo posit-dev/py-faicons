@@ -1,7 +1,7 @@
 
 # Font Awesome for Shiny
 
-An interface to Font-Awesome for use in Shiny for Python.
+An interface to [Font-Awesome](https://fontawesome.com/) for use in Shiny for Python.
 
 This package currently uses Font-Awesome 6.2.0.
 
@@ -13,7 +13,7 @@ pip install faicons
 
 ## Usage
 
-Use `icon_svg()` to get an `<svg>` representation of any Font Awesome 5 icon.
+Use `icon_svg()` to get an `<svg>` representation of the icon.
 
 ```python
 from faicons import icon_svg
