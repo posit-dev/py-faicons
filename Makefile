@@ -48,9 +48,9 @@ clean-test: ## remove test and coverage artifacts
 	rm -fr .pytest_cache
 
 lint/flake8: ## check style with flake8
-	flake8 fontawesome tests
+	flake8 faicons tests
 lint/black: ## check style with black
-	black --check fontawesome tests
+	black --check faicons tests
 
 lint: lint/flake8 lint/black ## check style
 
@@ -61,15 +61,15 @@ test-all: ## run tests on every Python version with tox
 	tox
 
 coverage: ## check code coverage quickly with the default Python
-	coverage run --source fontawesome -m pytest
+	coverage run --source faicons -m pytest
 	coverage report -m
 	coverage html
 	$(BROWSER) htmlcov/index.html
 
 docs: ## generate Sphinx HTML documentation, including API docs
-	rm -f docs/fontawesome.rst
+	rm -f docs/faicons.rst
 	rm -f docs/modules.rst
-	sphinx-apidoc -o docs/ fontawesome
+	sphinx-apidoc -o docs/ faicons
 	$(MAKE) -C docs clean
 	$(MAKE) -C docs html
 	$(BROWSER) docs/_build/html/index.html
@@ -86,4 +86,4 @@ dist: clean ## builds source and wheel package
 	ls -l dist
 
 install: dist ## install the package to the active Python's site-packages
-	python3 -m pip install --force-reinstall dist/fontawesome*.whl --find-links ../py-htmltools/dist/
+	python3 -m pip install --force-reinstall dist/faicons*.whl --find-links ../py-htmltools/dist/
