@@ -42,6 +42,13 @@ class IconData(TypedDict):
 with open(join(dirname(__file__), "icons.json")) as f:
     _ICONS = cast(Dict[str, IconData], json.load(f))
 
+# Key: alias name, Value: canonical icon name
+_ALIASES: Dict[str, str] = dict()
+for name, icon in _ICONS.items():
+    if "aliases" in icon and "names" in icon["aliases"]:
+        for alias in icon["aliases"]["names"]:
+            _ALIASES[alias] = name
+
 
 def metadata():
     """
@@ -114,9 +121,14 @@ def icon_svg(
       ValueError: If the icon name is not valid.
     """
 
-    icon = _ICONS.get(name)
-    if icon is None:
-        raise ValueError(f"Icon {name} not found.")
+    # Resolve alias if necessary
+    if name not in _ICONS:
+        if name in _ALIASES:
+            name = _ALIASES[name]
+        else:
+            raise ValueError(f"Icon {name} not found.")
+
+    icon = _ICONS[name]
 
     styles = icon["styles"]
     style = styles[0] if style is None else style
