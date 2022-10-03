@@ -3,22 +3,21 @@
 """Tests for `faicons` package."""
 
 import pytest
-
-
 import faicons
 
 
-@pytest.fixture
-def response():
-    """Sample pytest fixture.
+def test_icon_svg():
+    # Try with canonical name
+    icon_magnifying_glass = faicons.icon_svg("magnifying-glass")
+    assert str(icon_magnifying_glass).startswith("<svg ")
 
-    See more at: http://doc.pytest.org/en/latest/fixture.html
-    """
-    # import requests
-    # return requests.get('https://github.com/audreyr/cookiecutter-pypackage')
+    # Try with alias
+    icon_search = faicons.icon_svg("search")
 
+    assert str(icon_magnifying_glass) == str(icon_search)
 
-def test_content(response):
-    """Sample pytest test function with the pytest fixture as an argument."""
-    # from bs4 import BeautifulSoup
-    # assert 'GitHub' in BeautifulSoup(response.content).title.string
+    with pytest.raises(ValueError, match="^Icon ninja-shark not found\\.$"):
+        faicons.icon_svg("ninja-shark")
+
+    with pytest.raises(ValueError, match="^Style brand not found"):
+        faicons.icon_svg("magnifying-glass", style="brand")
