@@ -86,4 +86,5 @@ dist: clean ## builds source and wheel package
 	ls -l dist
 
 install: dist ## install the package to the active Python's site-packages
-	python3 -m pip install --force-reinstall dist/faicons*.whl --find-links ../py-htmltools/dist/
+	python3 -m pip uninstall -y faicons
+	python3 -m pip install dist/faicons*.whl
