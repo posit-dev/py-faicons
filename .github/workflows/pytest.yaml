@@ -13,7 +13,7 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        python-version: [3.7, 3.8, 3.9, "3.10"]
+        python-version: ["3.7", "3.8", "3.9", "3.10"]
       fail-fast: false
 
     steps:
@@ -38,6 +38,7 @@ jobs:
           make install
 
       - name: Lint with flake8
+        if: matrix.python-version != '3.7'
         run: |
           make lint
 
