@@ -1,13 +1,9 @@
-from os.path import join, dirname
 import json
 import re
-from typing import Literal, Optional, TypedDict, List, Dict, cast, Any
+from os.path import dirname, join
+from typing import Any, Dict, List, Literal, Optional, TypedDict, cast
 
-from htmltools import tags, Tag, css
-
-# TODO: make _html_escape public?
-from htmltools._util import _html_escape
-
+from htmltools import Tag, css, html_escape, tags
 
 __all__ = ("icon_svg", "metadata")
 
@@ -148,7 +144,7 @@ def icon_svg(
         svg_attrs["role"] = "img"
     elif a11y == "sem":
         title = icon["label"] if title is None else title
-        svg_attrs["aria-label"] = _html_escape(title, attr=True)
+        svg_attrs["aria-label"] = html_escape(title, attr=True)
         svg_attrs["role"] = "img"
 
     # N.B. this returns a tag object, not a string, because I don't think it's possible
@@ -156,7 +152,7 @@ def icon_svg(
     # out-of-the-box (if we really need this to be a string, we can probably make
     # nav()'s JSX component smarter)
     return tags.svg(
-        None if title is None else tags.title(_html_escape(title)),
+        None if title is None else tags.title(html_escape(title)),
         Tag("path", d=svg["path"]),
         **svg_attrs,
         style=css(
