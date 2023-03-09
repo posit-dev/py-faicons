@@ -4,8 +4,7 @@
 
 import pytest
 
-
-import faicons
+# import faicons
 
 
 @pytest.fixture
