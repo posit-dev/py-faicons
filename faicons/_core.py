@@ -155,6 +155,7 @@ def icon_svg(
         None if title is None else tags.title(html_escape(title)),
         Tag("path", d=svg["path"]),
         **svg_attrs,
+        class_="fa",
         style=css(
             fill=fill,
             fill_opacity=fill_opacity,
@@ -167,7 +168,6 @@ def icon_svg(
             margin_right=margin_right,
             position=position,
             vertical_align="-0.125em",
-            font_size="inherit",
             overflow="visible",
         ),
     )
