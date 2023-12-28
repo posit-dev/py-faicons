@@ -168,7 +168,6 @@ def icon_svg(
             margin_right=margin_right,
             position=position,
             vertical_align="-0.125em",
-            # font_size="inherit",
             overflow="visible",
         ),
     )
