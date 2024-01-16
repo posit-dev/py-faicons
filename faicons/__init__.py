@@ -1,4 +1,4 @@
-__version__ = "0.2.2"
+__version__ = "0.2.2.9000"
 
 from ._core import icon_svg, metadata
 
